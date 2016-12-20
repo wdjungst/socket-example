@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     get 'users/info'
+    get 'online_users', to: 'users#online_users'
   end
 
   get '*unmatched_route', to: 'home#index'

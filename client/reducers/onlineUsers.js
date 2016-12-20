@@ -1,9 +1,14 @@
 const onlineUsers = ( state = [], action ) => {
   switch (action.type) {
     case 'ALL_USERS_ONLINE':
-      return action.users;
+      let users = action.users.map( user => {
+        return user
+      });
+      return users
     case 'USER_ONLINE':
-      return [...state, action.user]
+      if (!state.find( u => u.id === action.user.id ))
+        return [...state, action.user]
+      return state
     case 'USER_OFFLINE':
       return state.filter( u => u.id !== action.id )
     default:

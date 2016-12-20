@@ -6,4 +6,9 @@ class Api::UsersController < ApplicationController
       render json: {}
     end
   end
+
+  def online_users
+    @users = User.where("is_online = ? AND users.id <> ?", true, current_user.id)
+    render json: @users
+  end
 end

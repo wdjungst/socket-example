@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ChannelList from './ChannelList';
 import OnlineUsers from './OnlineUsers';
-import { newUserOnline, userWentOffline } from '../actions/chat';
+import { newUserOnline, userWentOffline, onlineUsers } from '../actions/chat';
 
 class Lobby extends React.Component {
   componentDidMount() {
@@ -21,6 +21,7 @@ class Lobby extends React.Component {
               }
               break;
             case 'offline':
+              debugger
               let { id } = data.offline;
               this.props.dispatch(userWentOffline(id))
               break;
@@ -31,6 +32,7 @@ class Lobby extends React.Component {
         }
       });
     }
+    this.props.dispatch(onlineUsers(this.props.user.id));
   }
 
   componentWillUnmount() {

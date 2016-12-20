@@ -17,7 +17,8 @@ class App extends React.Component {
 
   logout(e) {
     e.preventDefault();
-    this.props.dispatch(logout(this.props.history));
+    let { history, user, dispatch } = this.props;
+    dispatch(logout(history, user.id));
   }
 
   navs() {

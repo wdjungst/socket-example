@@ -6,15 +6,15 @@ class OnlineUsersChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
+    binding.pry
     id = current_user.id
     current_user.update(is_online: false)
+    binding.pry
+    UserOfflineJob.perform_later(id)
   end
 
   def online(options)
     UserOnlineJob.perform_later(current_user)
   end
 
-  def offline(user_id)
-    UserOfflineJob.perform_later(user_id)
-  end
 end
